@@ -1,6 +1,6 @@
 // nodes/BaseNode.js
 
-import { Handle, Position } from 'reactflow';
+import { Handle } from 'reactflow';
 
 const BaseNode = ({ id, label, children, minWidth = 200, minHeight = 80, handles = [] }) => {
   return (

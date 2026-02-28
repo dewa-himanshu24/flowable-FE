@@ -1,12 +1,14 @@
 // textNode.js
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Position, useUpdateNodeInternals } from 'reactflow';
 import BaseNode from './baseNode';
 
 export const TextNode = ({ id, data }) => {
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
   const [variables, setVariables] = useState([]);
+
+  const textAreaRef = useRef(null);
 
   const updateNodeInternals = useUpdateNodeInternals();
 
@@ -20,6 +22,12 @@ export const TextNode = ({ id, data }) => {
   useEffect(() => {
     const extractedVariables = extractVariables(currText);
     setVariables(extractedVariables);
+
+    if (textAreaRef.current) {
+      textAreaRef.current.style.height = 'auto';
+      textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 'px';
+    }
+ 
   }, [currText]);
 
   useEffect(() => {
@@ -46,12 +54,20 @@ export const TextNode = ({ id, data }) => {
 
   return (
     <BaseNode id={id} label="Text" handles={handles}>
-      <label>
-        Text:
-        <textarea 
+      <>
+        <span           
+          style={{ 
+            paddingBottom: '4px',
+            fontSize: '12px',
+            fontWeight: '500',
+            color: '#4b5563'
+          }}>Text:</span>
+        <textarea
+          ref={textAreaRef}
           value={currText} 
           onChange={handleTextChange}
             style={{
+            width: '95%',
             marginTop: '5px',
             borderRadius: '4px',
             border: '1px solid #d1d5db',
@@ -60,7 +76,7 @@ export const TextNode = ({ id, data }) => {
             padding: '4px'
           }}
         />
-      </label>
+      </>
     </BaseNode>
   );
 }
