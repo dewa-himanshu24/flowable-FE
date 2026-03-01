@@ -85,6 +85,29 @@ export function NodeSubType({
           }
           placeholder="Enter text..."
           style={{
+            width: '95%',
+            padding: '6px',
+            borderRadius: '4px',
+            border: '1px solid #d1d5db',
+            fontSize: '12px',
+          }}
+        />
+      )}
+
+      {/* Integer */}
+      {type === 'integer' && (
+        <input
+          type="number"
+          value={value}
+          step="1"
+          onChange={(e) =>
+            updateNodeField(
+              id,
+              field,
+              e.target.value === '' ? '' : parseInt(e.target.value, 10)
+            )
+          }
+          style={{
             width: '100%',
             padding: '6px',
             borderRadius: '4px',
