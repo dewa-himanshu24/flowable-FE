@@ -108,7 +108,7 @@ export function NodeSubType({
             )
           }
           style={{
-            width: '100%',
+            width: '95%',
             padding: '6px',
             borderRadius: '4px',
             border: '1px solid #d1d5db',

@@ -6,6 +6,8 @@ import { OutputNode } from './outputNode';
 import { TextNode } from './textNode';
 import { NoteNode } from './noteNode';
 import { StartNode, EndNode } from './edgeNode';
+import { AttachmentNode } from './attachment';
+import { MultiNode } from './multiNode';
 
 export {
   InputNode,
@@ -15,6 +17,8 @@ export {
   NoteNode,
   StartNode,
   EndNode,
+  AttachmentNode,
+  MultiNode,
 };
 
 export const nodeTypes = {
@@ -25,4 +29,6 @@ export const nodeTypes = {
   note: NoteNode,
   start: StartNode,
   end: EndNode,
+  attach: AttachmentNode,
+  multi: MultiNode
 };
