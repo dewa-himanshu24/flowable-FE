@@ -1,8 +1,13 @@
-// nodeSubType
-
 import { useStore } from '../store';
 
-export function NodeSubType({ label, id, field = 'inputType', value, type='text', options }) {
+export function NodeSubType({
+  label,
+  id,
+  field = 'inputType',
+  value,
+  type = 'text',
+  options = [],
+}) {
   const updateNodeField = useStore((s) => s.updateNodeField);
 
   const TYPES = {
@@ -22,7 +27,7 @@ export function NodeSubType({ label, id, field = 'inputType', value, type='text'
         fontFamily: 'Inter, sans-serif',
       }}
     >
-    <div
+      <div
         style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -32,9 +37,7 @@ export function NodeSubType({ label, id, field = 'inputType', value, type='text'
           color: '#374151',
         }}
       >
-        <span>
-          {label}
-        </span>
+        <span>{label}</span>
 
         <span
           style={{
@@ -50,27 +53,63 @@ export function NodeSubType({ label, id, field = 'inputType', value, type='text'
         </span>
       </div>
 
-    {type === 'dropdown' && (
+      {/* Dropdown Type */}
+      {type === 'dropdown' && (
         <select
-            value={value}
-            onChange={(e) =>
-                updateNodeField(id, field, e.target.value)
-            }
-            style={{
-                width: '100%',
-                padding: '4px',
-                borderRadius: '4px',
-                border: '1px solid #d1d5db',
-                fontSize: '12px',
-            }}
+          value={value}
+          onChange={(e) =>
+            updateNodeField(id, field, e.target.value)
+          }
+          style={{
+            width: '100%',
+            padding: '4px',
+            borderRadius: '4px',
+            border: '1px solid #d1d5db',
+            fontSize: '12px',
+          }}
         >
-        {options.map((item) => (
+          {options.map((item) => (
             <option key={item.id} value={item.value}>
-            {item.label}
+              {item.label}
             </option>
-        ))}
+          ))}
         </select>
-    )}
+      )}
+
+      {/* Text Type */}
+      {type === 'text' && (
+        <textarea
+          value={value}
+          onChange={(e) =>
+            updateNodeField(id, field, e.target.value)
+          }
+          placeholder="Enter text..."
+          style={{
+            width: '100%',
+            padding: '6px',
+            borderRadius: '4px',
+            border: '1px solid #d1d5db',
+            fontSize: '12px',
+          }}
+        />
+      )}
+
+      {/* File Type */}
+      {type === 'file' && (
+        <input
+          type="file"
+          onChange={(e) =>
+            updateNodeField(
+              id,
+              field,
+              e.target.files?.[0]?.name || ''
+            )
+          }
+          style={{
+            fontSize: '12px',
+          }}
+        />
+      )}
     </div>
   );
 }
