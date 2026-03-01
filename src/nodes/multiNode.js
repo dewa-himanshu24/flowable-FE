@@ -17,7 +17,7 @@ export const MultiNode = ({ id, data }) => {
         field='multi1'
       />
       <NodeSubType
-        label='Multi Attach'
+        label='Multi Text'
         id={id}
         value={data?.multiText || 'text'}
         field='multiText'

@@ -12,7 +12,7 @@ export function NodeHeader({ label }) {
         alignItems: 'center',     
         justifyContent: 'center',  
       }}>
-            <span >{label}</span>
+            <span>{label}</span>
         </div>
     );
 }

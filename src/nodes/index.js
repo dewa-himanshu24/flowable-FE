@@ -30,5 +30,5 @@ export const nodeTypes = {
   start: StartNode,
   end: EndNode,
   attach: AttachmentNode,
-  multi: MultiNode
+  multi: MultiNode,
 };
