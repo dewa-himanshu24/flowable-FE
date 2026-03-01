@@ -9,7 +9,7 @@ export const NoteNode = ({ id }) => {
   useAutoResizeTextarea(textAreaRef, currText);
 
   return (
-    <BaseNode id={id} nodeType='notes'>    
+    <BaseNode id={id} style={{ border: 'none', background: 'none', width: '100%', minWidth: '300px', minHeight: '300px', resize: 'none', padding: '0px', boxShadow: 'none' }}>    
       <textarea
         name='noteNode'
         ref={textAreaRef}

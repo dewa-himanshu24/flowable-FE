@@ -2,7 +2,7 @@
 
 import { Handle, Position } from 'reactflow';
 
-const BaseNode = ({ id, label, children, minWidth=300, minHeight, inputs = [], outputs = [], nodeType='regular' }) => {
+const BaseNode = ({ id, children, minWidth=300, minHeight, inputs = [], outputs = [], style = {}, }) => {
 
   const generateHandles = (items, type, position) =>
   items.map((name, idx) => ({
@@ -21,21 +21,25 @@ const BaseNode = ({ id, label, children, minWidth=300, minHeight, inputs = [], o
   const outputHandles = generateHandles(outputs, 'source', Position.Right);
 
   function nodeStyle() {
-    if (nodeType === 'regular') {
-      return {
-        minWidth: minWidth,
-        minHeight: minHeight,
-        border: '2px solid #6366f1',
-        borderRadius: '8px',
-        background: '#fff',
-        padding: '10px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '8px',
-        boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
-      }
-    }
-  }
+  const baseStyle = {
+    minWidth,
+    minHeight,
+    border: '2px solid #6366f1',
+    borderRadius: '8px',
+    background: '#fff',
+    padding: '10px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+    boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
+    position: 'relative',
+  };
+
+  return {
+    ...baseStyle,
+    ...style,
+  };
+}
 
   return (
     <div style={nodeStyle()}>

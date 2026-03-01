@@ -11,6 +11,7 @@ import { LLMNode } from './nodes/llmNode';
 import { OutputNode } from './nodes/outputNode';
 import { TextNode } from './nodes/textNode';
 import { NoteNode } from './nodes/noteNode';
+import { StartNode, EndNode } from './nodes/edgeNode';
 
 import 'reactflow/dist/style.css';
 
@@ -22,6 +23,8 @@ const nodeTypes = {
   customOutput: OutputNode,
   text: TextNode,
   note: NoteNode,
+  start: StartNode,
+  end: EndNode,
 };
 
 const selector = (state) => ({
