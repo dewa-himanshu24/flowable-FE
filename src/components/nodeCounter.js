@@ -1,3 +1,5 @@
+// nodeCounter
+
 import { useState, useEffect } from 'react';
 import { useStore } from '../store';
 
