@@ -33,7 +33,7 @@ const BaseNode = ({ id, label, children, minWidth = 200, minHeight = 80, inputs 
       gap: '8px',
       boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
     }}>
-      <div style={{ 
+      {label && <div style={{ 
         borderBottom: '1px solid #e5e7eb', 
         paddingBottom: '4px',
         fontSize: '12px',
@@ -41,7 +41,7 @@ const BaseNode = ({ id, label, children, minWidth = 200, minHeight = 80, inputs 
         color: '#4b5563'
       }}>
         <span>{label}</span>
-      </div>
+      </div>}
       
       <div style={{ flexGrow: 1 }}>
         {children}
