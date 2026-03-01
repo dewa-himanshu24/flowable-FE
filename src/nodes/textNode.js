@@ -1,34 +1,19 @@
 // textNode.js
 
 import { useEffect, useRef, useState } from 'react';
-import { Position, useUpdateNodeInternals } from 'reactflow';
+import { useUpdateNodeInternals } from 'reactflow';
 import BaseNode from './baseNode';
+import { useAutoResizeTextarea } from '../hooks/useAutoResizeTextarea';
+import { useVariables } from '../hooks/useVariables';
 
 export const TextNode = ({ id, data }) => {
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
-  const [variables, setVariables] = useState([]);
-
   const textAreaRef = useRef(null);
 
+  const variables = useVariables(currText);
   const updateNodeInternals = useUpdateNodeInternals();
 
-  const extractVariables = (text) => {
-    const regex = /\{\{\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*\}\}/g;
-    const matches = [...text.matchAll(regex)];
-    const varNames = [...new Set(matches.map(m => m[1]))];
-    return varNames;
-  };
-
-  useEffect(() => {
-    const extractedVariables = extractVariables(currText);
-    setVariables(extractedVariables);
-
-    if (textAreaRef.current) {
-      textAreaRef.current.style.height = 'auto';
-      textAreaRef.current.style.height = textAreaRef.current.scrollHeight + 'px';
-    }
- 
-  }, [currText]);
+  useAutoResizeTextarea(textAreaRef, currText);
 
   useEffect(() => {
     updateNodeInternals(id);
