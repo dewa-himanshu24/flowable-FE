@@ -10,6 +10,7 @@ import { InputNode } from './nodes/inputNode';
 import { LLMNode } from './nodes/llmNode';
 import { OutputNode } from './nodes/outputNode';
 import { TextNode } from './nodes/textNode';
+import { NoteNode } from './nodes/noteNode';
 
 import 'reactflow/dist/style.css';
 
@@ -20,6 +21,7 @@ const nodeTypes = {
   llm: LLMNode,
   customOutput: OutputNode,
   text: TextNode,
+  note: NoteNode,
 };
 
 const selector = (state) => ({
@@ -58,7 +60,6 @@ export const PipelineUI = () => {
           if (event?.dataTransfer?.getData('application/reactflow')) {
             const appData = JSON.parse(event.dataTransfer.getData('application/reactflow'));
             const type = appData?.nodeType;
-      
             // check if the dropped element is valid
             if (typeof type === 'undefined' || !type) {
               return;

@@ -1,8 +1,25 @@
 // nodes/BaseNode.js
 
-import { Handle } from 'reactflow';
+import { Handle, Position } from 'reactflow';
 
-const BaseNode = ({ id, label, children, minWidth = 200, minHeight = 80, handles = [] }) => {
+const BaseNode = ({ id, label, children, minWidth = 200, minHeight = 80, inputs = [], outputs = [] }) => {
+
+  const generateHandles = (items, type, position) =>
+  items.map((name, idx) => ({
+    id: name,
+    type,
+    position,
+    style: {
+      top:
+        items.length === 1
+          ? '50%'
+          : `${((idx + 1) * 100) / (items.length + 1)}%`,
+    },
+  }));
+
+  const inputHandles = generateHandles(inputs, 'target', Position.Left);
+  const outputHandles = generateHandles(outputs, 'source', Position.Right);
+
   return (
     <div style={{
       minWidth: minWidth, 
@@ -30,7 +47,7 @@ const BaseNode = ({ id, label, children, minWidth = 200, minHeight = 80, handles
         {children}
       </div>
 
-      {handles.map((h, idx) => (
+      {[...inputHandles, ...outputHandles].map((h, idx) => (
         <Handle
           key={`${id}-${h.id}`}
           type={h.type}

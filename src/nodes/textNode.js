@@ -38,22 +38,8 @@ export const TextNode = ({ id, data }) => {
     setCurrText(e.target.value);
   };
 
-  const handles = [
-    {type: 'source', position: Position.Right, id: 'output'},
-    ...variables?.map((item, idx) => {
-    const top =
-      ((idx + 1) * 100) / (variables.length + 1);
-      
-    return {
-      type: 'target',
-      position: Position.Left, 
-      id: item,
-      style: { top: `${top}%`}   
-    }})
-  ];
-
   return (
-    <BaseNode id={id} label="Text" handles={handles}>
+    <BaseNode id={id} label="Text" inputs={variables} outputs={['output']}>
       <>
         <span           
           style={{ 
@@ -63,6 +49,7 @@ export const TextNode = ({ id, data }) => {
             color: '#4b5563'
           }}>Text:</span>
         <textarea
+          name='textNode'
           ref={textAreaRef}
           value={currText} 
           onChange={handleTextChange}
