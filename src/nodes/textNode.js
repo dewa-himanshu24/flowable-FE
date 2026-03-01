@@ -26,7 +26,7 @@ export const TextNode = ({ id, data }) => {
   };
 
   return (
-    <BaseNode id={id} label="Text" inputs={variables} outputs={['output']}>
+    <BaseNode id={id} inputs={variables} outputs={['output']}>
       <>
         <NodeHeader label="Text" />
         <NodeCounter
