@@ -20,7 +20,7 @@ export {
 export const nodeTypes = {
   customInput: InputNode,
   llm: LLMNode,
-  output: OutputNode,
+  customOutput: OutputNode,
   text: TextNode,
   note: NoteNode,
   start: StartNode,

@@ -2,17 +2,17 @@
 
 import { useStore } from '../store';
 
-export function NodeSubType({ label, id, field = 'inputType', value }) {
+export function NodeSubType({ label, id, field = 'inputType', value, type='text', options }) {
   const updateNodeField = useStore((s) => s.updateNodeField);
 
-  const NODE_TYPES = {
-    text: { label: 'Text' },
-    dropdown: { label: 'Dropdown' },
-    file: { label: 'File' },
+  const TYPES = {
+    text: 'Text',
+    dropdown: 'Dropdown',
+    file: 'File',
   };
 
   return (
-       <div
+    <div
       style={{
         paddingTop: '12px',
         borderRadius: '10px',
@@ -46,29 +46,31 @@ export function NodeSubType({ label, id, field = 'inputType', value }) {
             fontWeight: 500,
           }}
         >
-          {value}
+          {TYPES[type]}
         </span>
       </div>
 
+    {type === 'dropdown' && (
         <select
-        value={value}
-        onChange={(e) =>
-            updateNodeField(id, field, e.target.value)
-        }
-        style={{
-            width: '100%',
-            padding: '4px',
-            borderRadius: '4px',
-            border: '1px solid #d1d5db',
-            fontSize: '12px',
-        }}
+            value={value}
+            onChange={(e) =>
+                updateNodeField(id, field, e.target.value)
+            }
+            style={{
+                width: '100%',
+                padding: '4px',
+                borderRadius: '4px',
+                border: '1px solid #d1d5db',
+                fontSize: '12px',
+            }}
         >
-        {Object.entries(NODE_TYPES).map(([key, config]) => (
-            <option key={key} value={key}>
-            {config.label}
+        {options.map((item) => (
+            <option key={item.id} value={item.value}>
+            {item.label}
             </option>
         ))}
         </select>
+    )}
     </div>
   );
 }
