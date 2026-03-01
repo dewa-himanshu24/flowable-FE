@@ -2,7 +2,7 @@
 
 import { Handle, Position } from 'reactflow';
 
-const BaseNode = ({ id, label, children, minWidth = 200, minHeight = 80, inputs = [], outputs = [] }) => {
+const BaseNode = ({ id, label, children, minWidth=300, minHeight, inputs = [], outputs = [], nodeType='regular' }) => {
 
   const generateHandles = (items, type, position) =>
   items.map((name, idx) => ({
@@ -20,29 +20,25 @@ const BaseNode = ({ id, label, children, minWidth = 200, minHeight = 80, inputs 
   const inputHandles = generateHandles(inputs, 'target', Position.Left);
   const outputHandles = generateHandles(outputs, 'source', Position.Right);
 
+  function nodeStyle() {
+    if (nodeType === 'regular') {
+      return {
+        minWidth: minWidth,
+        minHeight: minHeight,
+        border: '2px solid #6366f1',
+        borderRadius: '8px',
+        background: '#fff',
+        padding: '10px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '8px',
+        boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
+      }
+    }
+  }
+
   return (
-    <div style={{
-      minWidth: minWidth, 
-      minHeight: minHeight, 
-      border: '2px solid #6366f1',
-      borderRadius: '8px',
-      background: '#fff',
-      padding: '10px',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '8px',
-      boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
-    }}>
-      {label && <div style={{ 
-        borderBottom: '1px solid #e5e7eb', 
-        paddingBottom: '4px',
-        fontSize: '12px',
-        fontWeight: 'bold',
-        color: '#4b5563'
-      }}>
-        <span>{label}</span>
-      </div>}
-      
+    <div style={nodeStyle()}>
       <div style={{ flexGrow: 1 }}>
         {children}
       </div>

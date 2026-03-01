@@ -5,6 +5,8 @@ import { useUpdateNodeInternals } from 'reactflow';
 import BaseNode from './baseNode';
 import { useAutoResizeTextarea } from '../hooks/useAutoResizeTextarea';
 import { useVariables } from '../hooks/useVariables';
+import { NodeHeader } from "../components/nodeHeader";
+import { NodeCounter } from "../components/nodeCounter";
 
 export const TextNode = ({ id, data }) => {
   const [currText, setCurrText] = useState(data?.text || '{{input}}');
@@ -26,13 +28,11 @@ export const TextNode = ({ id, data }) => {
   return (
     <BaseNode id={id} label="Text" inputs={variables} outputs={['output']}>
       <>
-        <span           
-          style={{ 
-            paddingBottom: '4px',
-            fontSize: '12px',
-            fontWeight: '500',
-            color: '#4b5563'
-          }}>Text:</span>
+        <NodeHeader label="Text" />
+        <NodeCounter
+          id={id}
+          counterName={id}
+         />
         <textarea
           name='textNode'
           ref={textAreaRef}
